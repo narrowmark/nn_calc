@@ -1,0 +1,5 @@
+INTRODUCTION
+------------
+nn_calc is a four-function arithmetic calculated implemented with an artificial neural
+network (ANN) using backpropagation, written in Python. It is being developed with the
+intention of exploring the possible uses of ANNs in a variety of different settings.

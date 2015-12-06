@@ -6,9 +6,24 @@ def dec_bin(number):
   base = bin(number)[2:]
   bin_list = []
   [bin_list.append(int(x)) for x in list(base)]
-  while len(bin_list) < 3:
+  while len(bin_list) < 4:
     bin_list.insert(0, 0)
   return bin_list
+
+def bin_dec(bin_list):
+  base = ''
+  for i in bin_list:
+    base += str(i)
+  return int(base, 2)
+
+def threshold(inputs, line=0.5):
+  outputs = []
+  for i in inputs:
+    if i < line:
+      outputs.append(0)
+    else:
+      outputs.append(1)
+  return outputs
 
 # Returns decimal numbers between low and high.
 def random_range(low, high):
@@ -44,18 +59,8 @@ class Network:
     self.hid_activation = [1.0] * self.hid
     self.out_activation = [1.0] * self.out
 
-#    self.inp_weight = new_rand_matrix(self.inp, self.hid, -0.2, 0.2)
-#    self.out_weight = new_rand_matrix(self.hid, self.out, -2.0, 2.0)
-    self.inp_weight = new_matrix(self.inp, self.hid)
-    self.out_weight = new_matrix(self.hid, self.out)
-
-    for i in range(self.inp):
-      for j in range(self.hid):
-        self.inp_weight[i][j] = random_range(-0.2, 0.2)
-
-    for i in range(self.hid):
-      for j in range(self.out):
-        self.out_weight[i][j] = random_range(-2.0, 2.0)
+    self.inp_weight = new_rand_matrix(self.inp, self.hid, -0.2, 0.2)
+    self.out_weight = new_rand_matrix(self.hid, self.out, -2.0, 2.0)
 
     self.inp_change = new_matrix(self.inp, self.hid)
     self.out_change = new_matrix(self.hid, self.out)
@@ -120,7 +125,7 @@ class Network:
 
   def test(self, patterns):
     for p in patterns:
-      print(p[0], '->', self.update(p[0]))
+      print(p[0], '->', bin_dec(threshold(self.update(p[0]))))
 
   def train(self, patterns, iterations=1000, learn_rate=0.5, momentum=0.1):
     for i in range(iterations):
@@ -150,7 +155,7 @@ def demo():
     [[1,1],[0]]
   ]
 
-  first = Network(6, 7, 3)
+  first = Network(8, 7, 4)
   first.train(pat)
   first.test(pat)
 

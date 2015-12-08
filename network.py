@@ -80,7 +80,7 @@ class Network:
     for p in patterns:
       print(p[0], '->', bin_dec(threshold(self.update(p[0]))))
 
-  def train(self, patterns, iterations=10000, learn_rate=0.3, momentum=0.1):
+  def train(self, patterns, iterations=1000, learn_rate=0.3, momentum=0.1):
     for i in range(iterations):
       error = 0.0
       for p in patterns:

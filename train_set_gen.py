@@ -3,38 +3,28 @@ from infrastructure import dec_bin
 
 def addition_set(x=12, y=12, write=0):
   add_set = []
-  """
-  for i in range(x):
+  for i in range(32):
     col_set = []
     col_set.append(dec_bin(0) + dec_bin(i))
     col_set.append(dec_bin(0 + i))
     add_set.append(col_set)
 
-  add_set.append([dec_bin(1) + dec_bin(0), dec_bin(1)])
-  add_set.append([dec_bin(5) + dec_bin(3), dec_bin(8)])
-  add_set.append([dec_bin(9) + dec_bin(0), dec_bin(9)])
-  add_set.append([dec_bin(0) + dec_bin(11), dec_bin(11)])
-  """
-  add_set.append([dec_bin(0) + dec_bin(0), dec_bin(0)])
-  add_set.append([dec_bin(0) + dec_bin(1), dec_bin(1)])
-  add_set.append([dec_bin(0) + dec_bin(2), dec_bin(2)])
-  add_set.append([dec_bin(0) + dec_bin(3), dec_bin(3)])
-  add_set.append([dec_bin(0) + dec_bin(4), dec_bin(4)])
-  add_set.append([dec_bin(0) + dec_bin(5), dec_bin(5)])
-  add_set.append([dec_bin(0) + dec_bin(6), dec_bin(6)])
-  add_set.append([dec_bin(0) + dec_bin(7), dec_bin(7)])
-  add_set.append([dec_bin(0) + dec_bin(8), dec_bin(8)])
-  add_set.append([dec_bin(0) + dec_bin(16), dec_bin(16)])
-  add_set.append([dec_bin(1) + dec_bin(0), dec_bin(1)])
-  add_set.append([dec_bin(8) + dec_bin(0), dec_bin(8)])
-  add_set.append([dec_bin(16) + dec_bin(0), dec_bin(16)])
-  """
-  for i in range(x):
+  for i in range(32):
     col_set = []
     col_set.append(dec_bin(i) + dec_bin(0))
     col_set.append(dec_bin(i + 0))
     add_set.append(col_set)
-  """
+
+  x = [0, 2, 4, 8, 12, 16, 20]
+  y = [31, 24, 16, 18, 8, 10]
+
+  #x = [2, 5, 3, 1, 7, 4, 2, 4, 6]
+  #y = [1, 6, 2, 4, 3, 3, 7, 8, 5]
+  for i, j in zip(x, y):
+    col_set = []
+    col_set.append(dec_bin(i) + dec_bin(j))
+    col_set.append(dec_bin(i + j))
+    add_set.append(col_set)
 
   if (write == 1):
     file = open('addition_set.py', 'w+')

@@ -4,10 +4,14 @@ import math
 from infrastructure import *
 
 class Network:
-  def __init__(self, inp, hid, out):
+  def __init__(self, inp, hid, out, iterations, learn_rate, momentum):
     self.inp = inp + 1
     self.hid = hid
     self.out = out
+
+    self.iterations = iterations
+    self.learn_rate = learn_rate
+    self.momentum = momentum
 
     self.inp_activation = [1.0] * self.inp
     self.hid_activation = [1.0] * self.hid
@@ -78,15 +82,15 @@ class Network:
 
   def test(self, patterns):
     for p in patterns:
-      print(p[0], '->', bin_dec(threshold(self.update(p[0]))))
+      print(p[0], '=', bin_dec(threshold(self.update(p[0]))))
 
-  def train(self, patterns, iterations=1000, learn_rate=0.3, momentum=0.1):
-    for i in range(iterations):
+  def train(self, patterns):
+    for i in range(self.iterations):
       error = 0.0
       for p in patterns:
         inputs = p[0]
         targets = p[1]
         self.update(inputs)
-        error += self.backpropagate(targets, learn_rate, momentum)
+        error += self.backpropagate(targets, self.learn_rate, self.momentum)
       if i % 100 == 0:
         print('Error %-.5f' % error)

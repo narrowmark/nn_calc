@@ -7,15 +7,20 @@ from network import Network
 
 def demo():
   params = iho_len(add_set[0])
-  first = Network(params[0], params[1], params[2])
+  first = Network(params[0], params[1], params[2], 5000, 0.08, momentum=0.1)
   first.train(add_set)
   first.test(add_set)
+
+  """
+  Used when dealing with entirely binary inputs.
+  """
   """
   x = [0, 1, 2, 3, 4, 5, 6]
   y = [9, 8, 7, 6, 4, 3, 3]
   print ''
   for i, j in zip(x, y):
     first.test([[dec_bin(i) + dec_bin(j), dec_bin(i + j)]])
+  """
   """
   print ''
   for i in range(32):
@@ -25,6 +30,7 @@ def demo():
     print "Testing " + str(i)
     for j in range(8):
       first.test([[dec_bin(i) + dec_bin(j), dec_bin(i + j)]])
+  """
 
 if __name__ == '__main__':
   demo()
